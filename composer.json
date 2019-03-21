@@ -1,0 +1,12 @@
+{
+    "name": "cvexa/finder",
+    "description": "search in files by content for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [{
+        "name": "cvexa",
+        "email": "cvexa@abv.bg"
+    }],
+    "minimum-stability": "dev",
+    "require": {},
+}

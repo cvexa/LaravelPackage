@@ -1,6 +1,6 @@
 <?php
     // MyVendor\contactform\src\ContactFormServiceProvider.php
-namespace vendor\finder;
+namespace cvexa\finder;
 
 use Illuminate\Support\ServiceProvider;
 

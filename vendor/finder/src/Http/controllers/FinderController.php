@@ -1,5 +1,5 @@
 <?php
-namespace vendor\finder\Http\Controllers;
+namespace cvexa\finder\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

@@ -11,13 +11,13 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "vendor\\finder\\": "src\\"
+            "cvexa\\finder\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "vendor\\finder\\FinderServiceProvider"
+                "cvexa\\finder\\FinderServiceProvider"
             ]
         }
     }

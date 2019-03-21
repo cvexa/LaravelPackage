@@ -5,8 +5,12 @@
     "license": "MIT",
     "authors": [{
         "name": "cvexa",
-        "email": "cvexa@abv.bg"
+        "email": "cvexxxxa@abv.bg"
     }],
     "minimum-stability": "dev",
     "require": {},
-}
+    "autoload": {
+        "psr-4": {
+            "vendor\\finder\\": "src/"
+        },
+    }

@@ -17,7 +17,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "vendor\\finder\\src\\ServiceProvider"
+                "vendor\\finder\\src\\FinderServiceProvider"
             ]
         }
     }

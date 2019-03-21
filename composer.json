@@ -17,7 +17,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "vendor\\finder\\src\\FinderServiceProvider"
+                "cvexa\\finder\\src\\FinderServiceProvider"
             ]
         }
     }

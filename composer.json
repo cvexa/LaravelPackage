@@ -15,6 +15,6 @@
         }
     },
     "providers": [
-        "vendor\\finder\\src\\FinderServiceProvider"
+        "vendor\\finder\\FinderServiceProvider"
     ]
 }

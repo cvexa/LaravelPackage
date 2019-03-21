@@ -14,7 +14,11 @@
             "vendor\\finder\\": "src/"
         }
     },
-    "providers": [
-        "cvexa\\finder\\FinderServiceProvider"
-    ]
+    "extra": {
+        "laravel": {
+            "providers": [
+                "vendor\\finder\\ServiceProvider"
+            ]
+        }
+    }
 }

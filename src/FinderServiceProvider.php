@@ -14,6 +14,9 @@ class FinderServiceProvider extends ServiceProvider
             'driver' => 'local',
             'root' => public_path(),
         ];
+        $this->publishes([
+            __DIR__ . '/Tests/Feature/Auth/searchTest.php' => base_path('Tests/Browser/searchTest.php'),
+        ]);
     }
     public function register()
     {

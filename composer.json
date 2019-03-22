@@ -8,7 +8,10 @@
         "email": "cvexxxxa@abv.bg"
     }],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "laravel/framework": "5.8*",
+        "orchestra/testbench-dusk": "~3.4"
+    },
     "autoload": {
         "psr-4": {
             "cvexa\\finder\\": "src"

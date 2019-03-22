@@ -21,7 +21,7 @@ class searchTest extends DuskTestCase
     {
         $this->faker = \Faker\Factory::create();
 
-        $this->browse(function (Browser $browser) use ($inputCases) {
+        $this->browse(function (Browser $browser) {
             $browser->visit('/find');
             $browser->waitForText('Search keyword in files');
         });

@@ -14,7 +14,6 @@ class FinderServiceProvider extends ServiceProvider
             'driver' => 'local',
             'root' => public_path(),
         ];
-        Artisan::call('dusk:install');
     }
     public function register()
     {

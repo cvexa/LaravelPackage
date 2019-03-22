@@ -10,7 +10,7 @@
     "minimum-stability": "dev",
     "require": {
         "laravel/framework": "5.8.*",
-        "laravel/dusk": "dev"
+        "orchestra/testbench-dusk": "~3.4"
     },
     "autoload": {
         "psr-4": {

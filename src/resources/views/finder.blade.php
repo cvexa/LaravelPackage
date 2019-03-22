@@ -27,7 +27,7 @@
               @csrf
               <div class="form-group">
                 <label for="exampleFormControlInput1">What to search</label>
-                <input type="text" class="form-control" name="search"  placeholder="keyword">
+                <input type="text" class="form-control" name="search"  placeholder="keyword" value="{{isset($searched)?$searched:''}}">
               </div>
 
               <div class="form-group">

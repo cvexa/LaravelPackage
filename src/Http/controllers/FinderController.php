@@ -24,9 +24,10 @@ class FinderController extends Controller
         ]);
         $disk = 'publicDisk';
         $publicDirectories = $this->getDirectories($disk);
-        $deny = Str::startsWith($request->path, '/ ');
+        $deny = Str::startsWith($request->path, '/');
         $denyVendor = Str::startsWith($request->path, '/vendor');
-        if ($deny || $denyVendor) {
+
+        if ($deny && strlen($request->path < 2)|| $denyVendor) {
             return view('finder::finder', ['publicDirectories' =>$publicDirectories])->withErrors(['This route is denied!']);
         }
         $onlyFiles = false;

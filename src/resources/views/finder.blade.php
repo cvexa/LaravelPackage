@@ -26,12 +26,17 @@
           <form action="{{route('find.me')}}" method="POST">
               @csrf
               <div class="form-group">
-                <label for="exampleFormControlInput1">What to search</label>
+                <label for="search">What to search</label>
                 <input type="text" class="form-control" name="search"  placeholder="keyword" value="{{isset($searched)?$searched:''}}">
               </div>
 
               <div class="form-group">
-                <label for="exampleFormControlInput1">Where to search</label>
+                  <label for="extension">File extensions</label>
+                  <input type="text" name="extension" value="" placeholder=".txt,.pdf...">
+              </div>
+
+              <div class="form-group">
+                <label for="location">Where to search</label>
                 <select class="" name="location">
                     <option value=0>all</option>
                     @foreach($publicDirectories as $dir)

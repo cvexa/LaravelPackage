@@ -16,6 +16,10 @@ class FinderController extends Controller
 
     public function search(Request $request)
     {
+        if (!empty($request->extension) || !is_null($request->extension)) {
+            $extensions = explode(',', $request->extension);
+            $extensions = str_replace(' ', '', $extensions);
+        }
         $publicDirectories = Storage::disk('publicDisk')->allDirectories();
         if (is_numeric($request->location)) {
             $dir = $publicDirectories;
@@ -29,7 +33,10 @@ class FinderController extends Controller
                 $content = Storage::disk('publicDisk')->get($file);
                 if (str_contains($content, $request->search) && mb_strpos($content, $request->search) !== false && Str::contains($content, $request->search)) {
                     $url = storage_path($file);
-                    if (!in_array($url, $output)) {
+                    if (isset($extensions)) {
+                        $valid = Str::endsWith($file, $extensions);
+                    }
+                    if (!in_array($url, $output) || isset($extensions) && $valid) {
                         $output[] = $url;
                     }
                 }

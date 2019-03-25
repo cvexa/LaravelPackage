@@ -16,10 +16,6 @@ class FinderController extends Controller
 
     public function search(Request $request)
     {
-        if (!empty($request->extension) || !is_null($request->extension)) {
-            $extensions = explode(',', $request->extension);
-            $extensions = str_replace(' ', '', $extensions);
-        }
         $publicDirectories = Storage::disk('publicDisk')->allDirectories();
         if (is_numeric($request->location)) {
             $dir = $publicDirectories;
@@ -31,17 +27,39 @@ class FinderController extends Controller
             $paths = Storage::disk('publicDisk')->allFiles($folders);
             foreach ($paths as $file) {
                 $content = Storage::disk('publicDisk')->get($file);
-                if (str_contains($content, $request->search) && mb_strpos($content, $request->search) !== false && Str::contains($content, $request->search)) {
-                    $url = storage_path($file);
-                    if (isset($extensions)) {
-                        $valid = Str::endsWith($file, $extensions);
-                    }
-                    if (!in_array($url, $output) || isset($extensions) && $valid) {
-                        $output[] = $url;
-                    }
+                $contentSearch = $this->contentSearch($content, $request->keyword, $request->extensions);
+                if ($contentsSearch && !in_array($contentSearch, $output)) {
+                    $output[] = $contentSearch;
                 }
             }
         }
         return view('finder::finder', ['output' => $output,'publicDirectories' => $publicDirectories]);
+    }
+
+
+    public function contentSearch($content, $keyword, $extensions)
+    {
+        if (!empty($extensions) || !is_null($extensions)) {
+            $valid = extensionsSearch($file, $extensions);
+            if ($valid && str_contains($content, $keyword) && mb_strpos($content, $keyword) !== false && Str::contains($content, $keyword)) {
+                $url = storage_path($file);
+                return $url;
+            }
+            return false;
+        }
+        //if not extensions provided will search anyway of file extension
+        if (str_contains($content, $keyword) && mb_strpos($content, $keyword) !== false && Str::contains($content, $keyword)) {
+            $url = storage_path($file);
+            return $url;
+        }
+        return false;
+    }
+
+    public function extensionsSearch($file, $extensions)
+    {
+        $extensions = str_replace(' ', '', $extensions);
+        $extensions = explode(',', $extensions);
+        $valid = Str::endsWith($file, $extensions);
+        return $valid;
     }
 }

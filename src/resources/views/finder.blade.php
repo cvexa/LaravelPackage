@@ -32,7 +32,7 @@
 
               <div class="form-group">
                   <label for="extension">File extensions</label>
-                  <input type="text" name="extension" value="" placeholder=".txt,.pdf...">
+                  <input type="text" name="extensions" value="" placeholder=".txt,.pdf...">
               </div>
 
               <div class="form-group">

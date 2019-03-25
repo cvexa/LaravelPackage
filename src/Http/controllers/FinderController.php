@@ -46,13 +46,14 @@ class FinderController extends Controller
                 return $url;
             }
             return false;
+        } else {
+            //if not extensions provided will search anyway of file extension
+            if (str_contains($content, $keyword) && mb_strpos($content, $keyword) !== false && Str::contains($content, $keyword)) {
+                $url = storage_path($file);
+                return $url;
+            }
+            return false;
         }
-        //if not extensions provided will search anyway of file extension
-        if (str_contains($content, $keyword) && mb_strpos($content, $keyword) !== false && Str::contains($content, $keyword)) {
-            $url = storage_path($file);
-            return $url;
-        }
-        return false;
     }
 
     public function extensionsSearch($file, $extensions)

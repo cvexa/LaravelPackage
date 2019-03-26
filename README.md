@@ -40,7 +40,7 @@ Route::get('cvexa/search', 'FinderController@search')->name('find.me');
 
 ## Description
 
-Input for keyword/sentence validation for max:500 characters<br/>
+Input for keyword/sentence validation for max:500 characters, this field is CASE SENSITIVE, and the search is CASE SENSITIVE<br/>
 File extensions section validation for max:500 characters<br/>
 more than one can be listed in the input separeted by a comma, for example:<br/>
 pdf, .php, .txt, css ,etc.<br/>

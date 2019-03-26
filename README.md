@@ -1,6 +1,6 @@
 # Project Title
 
-Search task
+Search task<br/>
 <i>Searching in application root folder/folders in all files filtered by a page inputs, radio buttons and select</i>
 
 ## Getting Started
@@ -41,7 +41,7 @@ Route::get('cvexa/search', 'FinderController@search')->name('find.me');
 ## Description
 
 Input for keyword/sentence validation for max:500 characters<br/>
-File extensions section<br/>
+File extensions section validation for max:500 characters<br/>
 more than one can be listed in the input separeted by a comma, for example:<br/>
 pdf, .php, .txt, css ,etc.<br/>
 short on page description which extensions are skipped on CONTENT search in files, known skipped:<br/>
@@ -90,7 +90,7 @@ public folder browser<br/>
 will appear after every search to show time consumed doing the search, and listing the results if any<br/>
 with the path to file where match is found<br/>
 
-
+<b>Searching will be performed also on all subfolders, provided by custom paths</b>
 ## Running the tests
 
 ```

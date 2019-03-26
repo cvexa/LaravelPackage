@@ -38,53 +38,57 @@ Route::get('cvexa/search', 'FinderController@search')->name('find.me');
 ```
 
 ## Description
-Input for keyword/sentence validation for max:500 characters<br/>
-File extensions section<br/>
-more than one can be listed in the input separeted by a comma, for example:<br/>
-pdf, .php, .txt, css.....<br/>
-short on page description which extensions are skipped on CONTENT search in files, known skipped:<br/>
-Microsoft Office files (for example ):<br/>
-*.doc<br/>
-*.docx<br/>
-*.xls<br/>
-*.ppt<br/>
-......
----
-valid content searchable CONTENT files:<br/>
-*.php<br/>
-*.txt<br/>
-*.js<br/>
-*.css<br/>
-*.xml<br/>
-*.env<br/>
-*.pdf<br/>
-*.scss<br/>
-......
----
+
+Input for keyword/sentence validation for max:500 characters
+File extensions section
+more than one can be listed in the input separeted by a comma, for example:
+pdf, .php, .txt, css.....
+short on page description which extensions are skipped on CONTENT search in files, known skipped:
+Microsoft Office files (for example ):
+```
+*.doc
+*.docx
+*.xls
+*.ppt
+```
+
+valid content searchable CONTENT files:
+```
+*.php
+*.txt
+*.js
+*.css
+*.xml
+*.env
+*.pdf
+*.scss
+```
+
+
 file extension filed can be empty, in that case all files extensions will be included in the search (except, for content search skipped extensions)<br/>
 NO restriction on files to search by file NAME;<br/>
----
+
 Custom path application<br/>
 if this input is present(not empty), the public select folders will be ignored,<br/>
 denied permission for '/' and '/vendor', 'vendor' paths, this field is for searching in the root/ folders<br/> of the laravel application, for example '/app' will search in Laravel/app folder, /routes will search in Laravel/routes<br/>
 this field can be empty if so, will take the value of the next section dropdown.<br/>
----
+
 Public Folder browser<br/>
 with select can choose between all folders in the Laravel/public folder they will be listed, if all value is selected<br/> will search in the whole public folder<br/>
----
+
 Search Filter<br/>
 determinate to search by a file Name or file Content (by default by Name)<br/>
----
+
 Priority:<br/>
 filter<br/>
 extensions input<br/>
 custom path input<br/>
 public folder browser<br/>
----
+
 Result box<br/>
 will appear after every search to show time consumed doing the search, and listing the results if any<br/>
 with the path to file where match is found<br/>
----
+
 
 ## Running the tests
 

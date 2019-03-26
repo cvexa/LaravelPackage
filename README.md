@@ -187,16 +187,16 @@ $browser->click('#search-btn')
     ->pause(500);
 $this->assertNotNull($browser->waitForText('index.php'));
 ```
-after that are some tests for searching in:
-web.php
-api.php
-app.css
-app.js
-and searching for 'Controller' by content and by filename in
-/app/Http/Controllers/
-and ending with validation tests for path to search for '/' and '/vendor' and 'vendor'
-and waiting for error
-assertions are 22 that must be successfull to pass the test.
+after that are some tests for searching in:<br/>
+web.php<br/>
+api.php<br/>
+app.css<br/>
+app.js<br/>
+and searching for 'Controller' by content and by filename in<br/>
+/app/Http/Controllers/<br/>
+and ending with validation tests for path to search for '/' and '/vendor' and 'vendor'<br/>
+and waiting for error<br/>
+assertions are 22 that must be successfull to pass the test.<br/>
 
 ## Authors
 

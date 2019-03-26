@@ -99,6 +99,13 @@ with the path to file where match is found<br/>
 <b>Searching will be performed also on all subfolders, provided by custom paths</b>
 ## Running the tests
 
+note the application must be running while starting the tests !
+dusk testing url is configured in .env file for example:
+```
+APP_URL=http://localhost:8000
+```
+more about [Laravel Dusk](https://laravel.com/docs/5.8/dusk)
+
 ```
 php artisan dusk
 ```

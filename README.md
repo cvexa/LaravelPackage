@@ -48,15 +48,17 @@ Route::get('cvexa/search', 'FinderController@search')->name('find.me');
 
 Input for keyword/sentence validation for max:500 characters, this field is CASE SENSITIVE, and the search is CASE SENSITIVE<br/>
 File extensions section validation for max:500 characters<br/>
+extenstions can be listed with dot, or without (.pdf, pdf) are both valid,<br/>
 more than one can be listed in the input separeted by a comma, for example:<br/>
 pdf, .php, .txt, css ,etc.<br/>
-short on page description which extensions are skipped on CONTENT search in files, known skipped:<br/>
+extensions who are skipped on CONTENT search in files:<br/>
 Microsoft Office files (for example ):
 ```
 *.doc
 *.docx
 *.xls
 *.ppt
+*....
 ```
 
 valid content searchable CONTENT files:

@@ -31,7 +31,7 @@ class FinderController extends Controller
         if ($denyVendor) {
             return view('finder::finder', ['publicDirectories' =>$publicDirectories])->withErrors(['This route is denied!']);
         }
-        $onlyFiles = false;
+
         $filter = (int)$request->filter;
         $output = [];
 
@@ -47,7 +47,6 @@ class FinderController extends Controller
             $dir = $publicDirectories;
             if (count($dir) < 1) {
                 $dir = $this->getFiles($disk);
-                $onlyFiles = true;
             }
         }
 

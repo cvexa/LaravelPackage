@@ -60,6 +60,9 @@ class FinderController extends Controller
 
         foreach ($dir as $folders) {
             $paths = $this->getFiles($disk);
+            if (!is_numeric($request->location)) {
+                $paths = $this->getFiles($disk, $folders);
+            }
             foreach ($paths as $file) {
                 $content = $this->getFile($disk, $file);
                 if ($filter > 0) {
@@ -92,8 +95,11 @@ class FinderController extends Controller
         return Storage::disk($disk)->allDirectories();
     }
 
-    public function getFiles($disk)
+    public function getFiles($disk, $folders = null)
     {
+        if (!is_null($folders)) {
+            return Storage::disk($disk)->allFiles($folders);
+        }
         return Storage::disk($disk)->allFiles();
     }
 

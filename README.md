@@ -1,10 +1,11 @@
 # Project Title
 
 Search task
+<i>Searching in application root folder/folders in all files filtered by a page inputs, radio buttons and select</i>
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will get you a copy of the package on your machine for development and testing purposes.
 
 
 ### Prerequisites
@@ -39,11 +40,11 @@ Route::get('cvexa/search', 'FinderController@search')->name('find.me');
 
 ## Description
 
-Input for keyword/sentence validation for max:500 characters
-File extensions section
-more than one can be listed in the input separeted by a comma, for example:
-pdf, .php, .txt, css.....
-short on page description which extensions are skipped on CONTENT search in files, known skipped:
+Input for keyword/sentence validation for max:500 characters<br/>
+File extensions section<br/>
+more than one can be listed in the input separeted by a comma, for example:<br/>
+pdf, .php, .txt, css ,etc.<br/>
+short on page description which extensions are skipped on CONTENT search in files, known skipped:<br/>
 Microsoft Office files (for example ):
 ```
 *.doc
@@ -68,24 +69,24 @@ valid content searchable CONTENT files:
 file extension filed can be empty, in that case all files extensions will be included in the search (except, for content search skipped extensions)<br/>
 NO restriction on files to search by file NAME;<br/>
 
-Custom path application<br/>
+<b>Custom path application</b><br/>
 if this input is present(not empty), the public select folders will be ignored,<br/>
 denied permission for '/' and '/vendor', 'vendor' paths, this field is for searching in the root/ folders<br/> of the laravel application, for example '/app' will search in Laravel/app folder, /routes will search in Laravel/routes<br/>
 this field can be empty if so, will take the value of the next section dropdown.<br/>
 
-Public Folder browser<br/>
+<b>Public Folder browser</b><br/>
 with select can choose between all folders in the Laravel/public folder they will be listed, if all value is selected<br/> will search in the whole public folder<br/>
 
-Search Filter<br/>
+<b>Search Filter</b><br/>
 determinate to search by a file Name or file Content (by default by Name)<br/>
 
-Priority:<br/>
+<b>Priority:</b><br/>
 filter<br/>
 extensions input<br/>
 custom path input<br/>
 public folder browser<br/>
 
-Result box<br/>
+<b>Result box</b><br/>
 will appear after every search to show time consumed doing the search, and listing the results if any<br/>
 with the path to file where match is found<br/>
 

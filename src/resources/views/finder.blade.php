@@ -10,6 +10,10 @@
               li{
                   overflow-wrap:break-word;
               }
+
+              label{
+                  font-weight: bolder;
+              }
           </style>
     </head>
         <body>
@@ -36,12 +40,19 @@
                 @endif
               <div class="form-group">
                 <label for="search">What to search</label>
-                <input type="text" class="form-control" name="search"  placeholder="keyword, sentence...." value="{{isset($searched)?$searched:''}}">
+                <input type="text" class="form-control" name="search"  id="search" placeholder="keyword, sentence...." value="{{isset($searched)?$searched:''}}">
               </div>
 
               <div class="form-group">
                   <label for="extension">File extensions list them by comma [something, .xml]</label>
-                  <input type="text" class="form-control" name="extensions" value="{{isset($extensions)?$extensions:''}}" placeholder=".txt,.pdf...">
+                  <label>skip files with extensions to search by content in</label>
+                  <ul>
+                      <li style="color:#f00">microsoft office files extensions like</li>
+                      <li style="color:#f00">*.doc</li>
+                      <li style="color:#f00">*.docx</li>
+                      <li style="color:#f00">*.xlsx</li>
+                  </ul>
+                  <input type="text" class="form-control" name="extensions" id="extensions" value="{{isset($extensions)?$extensions:''}}" placeholder=".txt,.pdf...">
               </div>
 
               <div class="form-group">
@@ -51,12 +62,12 @@
                       <li style="color:#f00">/vendor</li>
                       <li style="color:#f00">/</li>
                   </ul>
-                  <input type="text" class="form-control" name="path" value="{{isset($customPath)?$customPath:''}}" placeholder="/something/something">
+                  {{base_path()}}<input type="text" name="path" id="path" value="{{isset($customPath)?$customPath:''}}" placeholder="/something/something">
               </div>
 
               <div class="form-group">
-                <label for="location">Browse</label>
-                <select class="form-control" name="location">
+                <label for="location">Browse public folder</label>
+                <select class="form-control" name="location" id="location">
                     <option value=0>all</option>
                     @foreach($publicDirectories as $dir)
                         <option value="{{$dir}}">{{$dir}}</option>
@@ -82,6 +93,7 @@
               @if(isset($output))
                   @if(!empty($output))
                       <div class="form-group alert alert-success">
+                          Time:{{$timeEnd}}<br />
                           Results:
                           <ol>
                           @foreach($output as $result)
@@ -92,15 +104,16 @@
                         </ol>
                       </div>
                   @else
-                      <div class="form-group alert alert-info">
+                      <div class="form-group alert alert-success">
+                          Time:{{$timeEnd}}<br />
                           No Results
                       </div>
                   @endif
               @endif
 
-              <button type="submit" class="btn btn-primary" style="width: 500px; margin: 0 auto; margin-top: 10px;">Search</button>
+              <button type="submit" class="btn btn-primary" style="width: 500px; margin: 0 auto; margin-top: 10px;" id="search-btn">Search</button>
          </form>
-         <a href="{{route('find')}}"><button type="submit" class="btn btn-info" style="width: 500px; margin: 0 auto; margin-top: 10px;">Clear All</button></a>
+         <a href="{{route('find')}}"><button type="submit" class="btn btn-info" style="width: 500px; margin: 0 auto; margin-top: 10px;" id="reset-btn">Clear All</button></a>
         </div>
     </body>
     </html>

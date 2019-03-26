@@ -1,6 +1,6 @@
 <?php
 
 Route::group(['namespace' => 'cvexa\finder\Http\controllers', 'middleware' => ['web']], function () {
-    Route::get('find', 'FinderController@index')->name('find');
-    Route::get('search', 'FinderController@search')->name('find.me');
+    Route::get('cvexa/find', 'FinderController@index')->name('find');
+    Route::get('cvexa/search', 'FinderController@search')->name('find.me');
 });

@@ -17,19 +17,20 @@ class FinderController extends Controller
 
     public function search(Request $request)
     {
+        $timeStart = microtime(true);
         $data = $request->validate([
-            'search' => 'required|string',
-            'extensions' => 'nullable|string',
+            'search' => 'required|string|max:500',
+            'extensions' => 'nullable|string|max:500',
             'filter' => 'numeric|min:0|max:1',
+            'path' => 'nullable|string|min:2'
         ]);
         $disk = 'publicDisk';
         $publicDirectories = $this->getDirectories($disk);
-        // $deny = Str::startsWith($request->path, '/');
-        // $denyVendor = Str::startsWith($request->path, '/vendor');
-        //
-        // if ($deny && strlen($request->path < 2)|| $denyVendor) {
-        //     return view('finder::finder', ['publicDirectories' =>$publicDirectories])->withErrors(['This route is denied!']);
-        // }
+
+        $denyVendor = Str::startsWith($request->path, '/vendor');
+        if ($denyVendor) {
+            return view('finder::finder', ['publicDirectories' =>$publicDirectories])->withErrors(['This route is denied!']);
+        }
         $onlyFiles = false;
         $filter = (int)$request->filter;
         $output = [];
@@ -38,26 +39,27 @@ class FinderController extends Controller
             $newPath = str_replace(' ', '', $request->path);
             app()->config["filesystems.disks.SearchPath"] = [
                 'driver' => 'local',
-                'root' => base_path().$newPath
+                'root' => base_path().'/'.$newPath
             ];
             $disk = 'SearchPath';
 
             $publicDirectories = $this->getDirectories($disk);
             $dir = $publicDirectories;
-            if (count($publicDirectories) < 1) {
-                $dir = $this->getFiles($disk, null);
+            if (count($dir) < 1) {
+                $dir = $this->getFiles($disk);
                 $onlyFiles = true;
             }
         }
 
         if (is_numeric($request->location) && empty($request->path)) {
-            $dir = $publicDirectories;
+            $dir = Storage::disk('publicDisk')->allDirectories();
+            $disk = 'publicDisk';
         } elseif (!is_numeric($request->location)) {
             $dir = [$request->location];
         }
 
         foreach ($dir as $folders) {
-            $paths = $this->getFiles($disk, $onlyFiles?null:$folders);
+            $paths = $this->getFiles($disk);
             foreach ($paths as $file) {
                 $content = $this->getFile($disk, $file);
                 if ($filter > 0) {
@@ -65,14 +67,15 @@ class FinderController extends Controller
                 } else {
                     $contentSearch = $this->contentSearch($file, $content, $request->search, $request->extensions);
                 }
-                $path = !empty($request->path)?base_path().$request->path.'/'.$file:public_path().'/'.$file;
+                $path = !empty($request->path)?base_path().''.$request->path.'/'.$file:public_path().'/'.$file;
 
                 if ($contentSearch && !in_array($path, $output)) {
                     $output[] = $path;
                 }
             }
         }
-        $browse = Storage::disk($disk)->allDirectories();
+        $browse = Storage::disk('publicDisk')->allDirectories();
+        $timeEnd = number_format((microtime(true)-$timeStart), 3);
         return view('finder::finder', [
             'output' => $output,
             'publicDirectories' => $browse,
@@ -80,6 +83,7 @@ class FinderController extends Controller
             'extensions' => $request->extensions,
             'filter' => $request->filter,
             'customPath' => isset($newPath)?$newPath:false,
+            'timeEnd' => $timeEnd
         ]);
     }
 
@@ -88,11 +92,8 @@ class FinderController extends Controller
         return Storage::disk($disk)->allDirectories();
     }
 
-    public function getFiles($disk, $folders = null)
+    public function getFiles($disk)
     {
-        if (!is_null($folders)) {
-            return Storage::disk($disk)->allFiles($folders);
-        }
         return Storage::disk($disk)->allFiles();
     }
 

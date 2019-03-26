@@ -9,8 +9,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Laravel 5.*
-orchestra/testbench-dusk ~3.4
+Laravel 5.*<br/>
+orchestra/testbench-dusk ~3.4<br/>
 
 
 ### Installing
@@ -21,9 +21,9 @@ download and install the package via composer
 composer require cvexa/finder
 ```
 
-package will install orchestra/testbench-dusk package if not presented
+package will install orchestra/testbench-dusk package if not presented<br/>
 
-Publish package Tests
+publish package Tests
 
 ```
 php artisan vendor:publish \\select Provider: cvexa\finder\FinderServiceProvider
@@ -38,58 +38,60 @@ Route::get('cvexa/search', 'FinderController@search')->name('find.me');
 ```
 
 ## Description
-Input for keyword/sentence validation for max:500 characters
-File extensions section
-more than one can be listed in the input separeted by a comma, for example:
-pdf, .php, .txt, css.....
-short on page description which extensions are skipped on CONTENT search in files, known skipped:
-Microsoft Office files (for example ):
-*.doc
-*.docx
-*.xls
-*.ppt
+Input for keyword/sentence validation for max:500 characters<br/>
+File extensions section<br/>
+more than one can be listed in the input separeted by a comma, for example:<br/>
+pdf, .php, .txt, css.....<br/>
+short on page description which extensions are skipped on CONTENT search in files, known skipped:<br/>
+Microsoft Office files (for example ):<br/>
+*.doc<br/>
+*.docx<br/>
+*.xls<br/>
+*.ppt<br/>
 ......
-valid content searchable CONTENT files:
-*.php
-*.txt
-*.js
-*.css
-*.xml
-*.env
-*.pdf
-*.scss
+---
+valid content searchable CONTENT files:<br/>
+*.php<br/>
+*.txt<br/>
+*.js<br/>
+*.css<br/>
+*.xml<br/>
+*.env<br/>
+*.pdf<br/>
+*.scss<br/>
 ......
-file extension filed can be empty, in that case all files extensions will be included in the search (except, for content search skipped extensions)
-NO restriction on files to search by file NAME;
-
-Custom path application
-if this input is present(not empty), the public select folders will be ignored,
-denied permission for '/' and '/vendor', 'vendor' paths, this field is for searching in the root/ folder s of the laravel application, for example '/app' will search in Laravel/app folder, /routes will search in Laravel/routes
-this field can be empty if so, will take the value of the next section dropdown.
-
-Public Folder browser
-with select can choose between all folders in the Laravel/public folder they will be listed, if all value is selected will search in the whole public folder
-
-Search Filter
-determinate to search by a file Name or file Content (by default by Name)
-
-Priority:
-filter
-extensions input
-custom path input
-public folder browser
-
-Result box
-will appear after every search to show time consumed doing the search, and listing the results if any
-with the path to file where match is found
-
+---
+file extension filed can be empty, in that case all files extensions will be included in the search (except, for content search skipped extensions)<br/>
+NO restriction on files to search by file NAME;<br/>
+---
+Custom path application<br/>
+if this input is present(not empty), the public select folders will be ignored,<br/>
+denied permission for '/' and '/vendor', 'vendor' paths, this field is for searching in the root/ folders<br/> of the laravel application, for example '/app' will search in Laravel/app folder, /routes will search in Laravel/routes<br/>
+this field can be empty if so, will take the value of the next section dropdown.<br/>
+---
+Public Folder browser<br/>
+with select can choose between all folders in the Laravel/public folder they will be listed, if all value is selected<br/> will search in the whole public folder<br/>
+---
+Search Filter<br/>
+determinate to search by a file Name or file Content (by default by Name)<br/>
+---
+Priority:<br/>
+filter<br/>
+extensions input<br/>
+custom path input<br/>
+public folder browser<br/>
+---
+Result box<br/>
+will appear after every search to show time consumed doing the search, and listing the results if any<br/>
+with the path to file where match is found<br/>
+---
 
 ## Running the tests
 
 ```
 php artisan dusk
 ```
-if you want to see the tests in browser open : tests/DuskTestCase.php
+if you want to see the tests in browser open : tests/DuskTestCase.php<br/>
 and find this method
 
 ```

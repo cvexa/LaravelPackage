@@ -23,6 +23,11 @@ composer require cvexa/finder
 ```
 
 package will install orchestra/testbench-dusk package if not presented<br/>
+if package its not installed yet run the following comand in order to run the tests later<br>
+
+```
+php artisan dusk:install
+```
 
 publish package Tests
 
@@ -31,6 +36,7 @@ php artisan vendor:publish \\select Provider: cvexa\finder\FinderServiceProvider
 ```
 
 searchTest.php will be copied to Tests\Browser;
+
 ## Package routes
 
 ```
@@ -96,6 +102,7 @@ with the path to file where match is found<br/>
 ```
 php artisan dusk
 ```
+This command will run all dusk tests, of the application including now the package tests<br>
 if you want to see the tests in browser open : tests/DuskTestCase.php<br/>
 and find this method
 

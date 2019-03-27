@@ -10,7 +10,7 @@ These instructions will get you a copy of the package on your machine for develo
 
 ### Prerequisites
 
-Laravel 5.*<br/>
+Laravel ^5.6*<br/>
 orchestra/testbench-dusk ~3.4<br/>
 
 
@@ -21,12 +21,12 @@ download and install the package via composer
 ```
 composer require cvexa/finder
 ```
-if stability errors run
+if 'stability errors' run
 
 ```
 composer require "cvexa/finder:dev-master"
 ```
-if links are not supported error run
+if 'links are not supported error' run
 ```
 php artisan storage:link
 ```
@@ -84,11 +84,12 @@ valid content searchable CONTENT files:
 file extension filed can be empty, in that case all files extensions will be included in the search (except, for content search skipped extensions)<br/>
 NO restriction on files to search by file NAME;<br/>
 
-<b>Places 3 options</b>
+<b>Places 3 options</b><br>
+<i>every option eliminate the other 2, and all options can be empty (except the select - default is all) if no option is changed(or left empty), the public folder select 'all' will be used to search in</i><br/>
 <b>1.Custom path application</b><br/>
-if this input is present(not empty), the public select folders will be ignored,<br/>
+
 denied permission for '/' and '/vendor', 'vendor' paths, this field is for searching in the <i>root/ folders<br/> of the laravel application</i>, for example '/app' will search in Laravel/app folder, /routes will search in Laravel/routes<br/>
-this field can be empty if so, will take the value of the next section dropdown.<br/>
+<br/>
 
 <b>2.Public Folder browser</b><br/>
 with select can choose between all folders in the <i>Laravel/public</i> folder they will be listed, if all value is selected<br/> will search in the whole public folder<br/>
@@ -96,15 +97,15 @@ with select can choose between all folders in the <i>Laravel/public</i> folder t
 <b>3.Custom path outside the application folder</b>
 search in all files and folders outside the application folder for example:
 server/<br/>
-    /folder1<br/>
-        /folder1.1<br/>
-         etc..<br/>
-    /folder2<br/>
-    /folder3<br/>
-    /Laravel(with the package)<br/>
-    /folder5<br/>
-    file.txt<br/>
-    etc..<br/>
+&nbsp;&nbsp;/folder1<br/>
+&nbsp;&nbsp;&nbsp;/folder1.1<br/>
+&nbsp;&nbsp;&nbsp;etc..<br/>
+&nbsp;&nbsp;/folder2<br/>
+&nbsp;&nbsp;/folder3<br/>
+&nbsp;&nbsp;/Laravel(with the package)<br/>
+&nbsp;&nbsp;/folder5<br/>
+&nbsp;&nbsp;file.txt<br/>
+&nbsp;&nbsp;etc..<br/>
 
 <b>Search Filter</b><br/>
 determinate to search by a file Name or file Content (by default by Name)<br/>
@@ -112,8 +113,7 @@ determinate to search by a file Name or file Content (by default by Name)<br/>
 <b>Priority:</b><br/>
 filter<br/>
 extensions input<br/>
-custom path input<br/>
-public folder browser<br/>
+one of the 3 search path methods<br/>
 
 <b>Result box</b><br/>
 will appear after every search to show time consumed doing the search, and listing the results if any<br/>

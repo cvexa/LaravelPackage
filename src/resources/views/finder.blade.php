@@ -5,6 +5,10 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+          <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
           <title>Search by keywords</title>
           <style media="screen">
               li{
@@ -13,6 +17,10 @@
 
               label{
                   font-weight: bolder;
+              }
+
+              .red-text{
+                  color:#f00;
               }
           </style>
     </head>
@@ -47,22 +55,23 @@
                   <label for="extension">File extensions list them by comma [something, .xml]</label>
                   <label>skip files with extensions to search by content in</label>
                   <ul>
-                      <li style="color:#f00">microsoft office files extensions like</li>
-                      <li style="color:#f00">*.doc</li>
-                      <li style="color:#f00">*.docx</li>
-                      <li style="color:#f00">*.xlsx</li>
+                      <li class="red-text">microsoft office files extensions like</li>
+                      <li class="red-text">*.doc</li>
+                      <li class="red-text">*.docx</li>
+                      <li class="red-text">*.xlsx</li>
                   </ul>
                   <input type="text" class="form-control" name="extensions" id="extensions" value="{{isset($extensions)?$extensions:''}}" placeholder=".txt,.pdf...">
               </div>
 
-              <div class="form-group">
+              <div class="form-group" id="custom_path_wrapper">
                   <label for="extension">Custom Path Application</label><br/>
                   <label>permission denied for</label>
                   <ul>
-                      <li style="color:#f00">/vendor</li>
-                      <li style="color:#f00">/</li>
+                      <li class="red-text">/vendor</li>
+                      <li class="red-text">/</li>
                   </ul>
                   {{base_path()}}<input type="text" name="path" id="path" value="{{isset($customPath)?$customPath:''}}" placeholder="/something/something">
+                  <br/><span class="red-text">OR</span>
               </div>
 
               <div class="form-group">
@@ -73,6 +82,12 @@
                         <option value="{{$dir}}">{{$dir}}</option>
                     @endforeach
                 </select>
+                 <span class="red-text">OR</span>
+              </div>
+
+              <div class="form-group" id="custom_path_outside_wrapper">
+                  <label for="outside">Custom Path outside the Application folder</label><br/>
+                  <input type="text" name="outside" id="outside" value="{{isset($outside)?$outside:''}}" placeholder="/something/something">
               </div>
 
               <div class="form-group">
@@ -115,5 +130,43 @@
          </form>
          <a href="{{route('find')}}"><button type="submit" class="btn btn-info" style="width: 500px; margin: 0 auto; margin-top: 10px;" id="reset-btn">Clear All</button></a>
         </div>
+        <script type="text/javascript">
+            $(function(){
+                $('#path').on('keyup',function(){
+                    if(this.value.length > 1){
+                        $('#location').prop('disabled', 'disabled');
+                        $('#outside').val('');
+                        $('#outside').prop('disabled', 'disabled');
+                    }else{
+                        $('#location').prop('disabled', '');
+                        $('#outside').prop('disabled', '');
+                    }
+                });
+
+                $('#outside').on('keyup',function(){
+                    if(this.value.length > 1){
+                        $('#location').prop('disabled', 'disabled');
+                        $('#path').val('');
+                        $('#path').prop('disabled', 'disabled');
+                    }else{
+                        $('#location').prop('disabled', '');
+                        $('#path').prop('disabled', '');
+                    }
+                });
+
+                $('#custom_path_wrapper').hover(function(){
+                    $('#path').prop('disabled', '');
+                });
+
+                $('#custom_path_outside_wrapper').hover(function(){
+                    $('#outside').prop('disabled', '');
+                });
+
+                $('#location').change(function() {
+                    $('#path').prop('disabled', 'disabled');
+                    $('#outside').prop('disabled', 'disabled');
+                });
+            })
+        </script>
     </body>
     </html>

@@ -31,7 +31,7 @@ if links are not supported error run
 php artisan storage:link
 ```
 package will install orchestra/testbench-dusk package if not presented<br/>
-if package its not installed yet run the following comand in order to run the tests later<br>
+if package its not installed previously run the following comand in order to run the tests later<br>
 
 ```
 php artisan dusk:install
@@ -84,13 +84,27 @@ valid content searchable CONTENT files:
 file extension filed can be empty, in that case all files extensions will be included in the search (except, for content search skipped extensions)<br/>
 NO restriction on files to search by file NAME;<br/>
 
-<b>Custom path application</b><br/>
+<b>Places 3 options</b>
+<b>1.Custom path application</b><br/>
 if this input is present(not empty), the public select folders will be ignored,<br/>
-denied permission for '/' and '/vendor', 'vendor' paths, this field is for searching in the root/ folders<br/> of the laravel application, for example '/app' will search in Laravel/app folder, /routes will search in Laravel/routes<br/>
+denied permission for '/' and '/vendor', 'vendor' paths, this field is for searching in the <i>root/ folders<br/> of the laravel application</i>, for example '/app' will search in Laravel/app folder, /routes will search in Laravel/routes<br/>
 this field can be empty if so, will take the value of the next section dropdown.<br/>
 
-<b>Public Folder browser</b><br/>
-with select can choose between all folders in the Laravel/public folder they will be listed, if all value is selected<br/> will search in the whole public folder<br/>
+<b>2.Public Folder browser</b><br/>
+with select can choose between all folders in the <i>Laravel/public</i> folder they will be listed, if all value is selected<br/> will search in the whole public folder<br/>
+
+<b>3.Custom path outside the application folder</b>
+search in all files and folders outside the application folder for example:
+server/<br/>
+    /folder1<br/>
+        /folder1.1<br/>
+         etc..<br/>
+    /folder2<br/>
+    /folder3<br/>
+    /Laravel(with the package)<br/>
+    /folder5<br/>
+    file.txt<br/>
+    etc..<br/>
 
 <b>Search Filter</b><br/>
 determinate to search by a file Name or file Content (by default by Name)<br/>

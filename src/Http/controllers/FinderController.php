@@ -22,18 +22,19 @@ class FinderController extends Controller
             'search' => 'required|string|max:500',
             'extensions' => 'nullable|string|max:500',
             'filter' => 'numeric|min:0|max:1',
-            'path' => 'nullable|string|min:2'
+            'path' => 'nullable|string|min:2',
+            'outside' => 'nullable|string|min:2',
         ]);
+
         $disk = 'publicDisk';
         $publicDirectories = $this->getDirectories($disk);
+        $filter = (int)$request->filter;
+        $output = [];
 
         $denyVendor = Str::startsWith($request->path, '/vendor');
         if ($denyVendor) {
             return view('finder::finder', ['publicDirectories' =>$publicDirectories])->withErrors(['This route is denied!']);
         }
-
-        $filter = (int)$request->filter;
-        $output = [];
 
         if (!empty($request->path)) {
             $newPath = str_replace(' ', '', $request->path);
@@ -42,15 +43,15 @@ class FinderController extends Controller
                 'root' => base_path().'/'.$newPath
             ];
             $disk = 'SearchPath';
-
-            $publicDirectories = $this->getDirectories($disk);
-            $dir = $publicDirectories;
-            if (count($dir) < 1) {
-                $dir = $this->getFiles($disk);
-            }
+            $dir = $this->getCustomDirs($disk);
         }
 
-        if (is_numeric($request->location) && empty($request->path)) {
+        if (!empty($request->outside)) {
+            $disk = $this->outsideFolders($request->outside);
+            $dir = $this->getCustomDirs($disk);
+        }
+
+        if (is_numeric($request->location) && empty($request->path) && empty($request->outside)) {
             $dir = Storage::disk('publicDisk')->allDirectories();
             $disk = 'publicDisk';
         } elseif (!is_numeric($request->location)) {
@@ -69,7 +70,7 @@ class FinderController extends Controller
                 } else {
                     $contentSearch = $this->contentSearch($file, $content, $request->search, $request->extensions);
                 }
-                $path = !empty($request->path)?base_path().''.$request->path.'/'.$file:public_path().'/'.$file;
+                $path = $this->getPath($request->path, $request->outside, $file);
 
                 if ($contentSearch && !in_array($path, $output)) {
                     $output[] = $path;
@@ -87,6 +88,39 @@ class FinderController extends Controller
             'customPath' => isset($newPath)?$newPath:false,
             'timeEnd' => $timeEnd
         ]);
+    }
+
+    public function outsideFolders($path)
+    {
+        app()->config["filesystems.disks.outside"] = [
+                    'driver' => 'local',
+                    'root' => dirname(getcwd()). DIRECTORY_SEPARATOR . '../'.$path
+                ];
+        $disk = 'outside';
+
+        return $disk;
+    }
+
+    public function getPath($custom, $outside, $file)
+    {
+        $path = public_path().'/'.$file;
+        if (!empty($custom)) {
+            $path = base_path().$custom.'/'.$file;
+        }
+        if (!empty($outside)) {
+            $path = $outside.'/'.$file;
+        }
+        return $path;
+    }
+
+    public function getCustomDirs($disk)
+    {
+        $publicDirectories = $this->getDirectories($disk);
+        $dir = $publicDirectories;
+        if (count($dir) < 1) {
+            $dir = $this->getFiles($disk);
+        }
+        return $dir;
     }
 
     public function getDirectories($disk)

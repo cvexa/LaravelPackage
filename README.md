@@ -94,7 +94,7 @@ denied permission for '/' and '/vendor', 'vendor' paths, this field is for searc
 <b>2.Public Folder browser</b><br/>
 with select can choose between all folders in the <i>Laravel/public</i> folder they will be listed, if all value is selected<br/> will search in the whole public folder<br/>
 
-<b>3.Custom path outside the application folder</b>
+<b>3.Custom path outside the application folder (one level above)</b>
 search in all files and folders outside the application folder for example:
 server/<br/>
 &nbsp;&nbsp;/folder1<br/>

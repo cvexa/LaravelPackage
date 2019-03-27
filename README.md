@@ -21,7 +21,11 @@ download and install the package via composer
 ```
 composer require cvexa/finder
 ```
+if stability errors run
 
+```
+composer require "cvexa/finder:dev-master"
+```
 package will install orchestra/testbench-dusk package if not presented<br/>
 if package its not installed yet run the following comand in order to run the tests later<br>
 
@@ -134,7 +138,7 @@ protected function driver()
     }
 ```
 
-comment '--headless', to open browser and see realtime brower test
+comment '--headless', to open browser and see realtime browser test
 ```
 protected function driver()
     {

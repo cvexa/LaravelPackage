@@ -1,6 +1,6 @@
 {
     "name": "cvexa/finder",
-    "description": "search in files by content for Laravel",
+    "description": "search in files by content or filename for Laravel",
     "type": "library",
     "license": "MIT",
     "authors": [{
@@ -9,7 +9,6 @@
     }],
     "minimum-stability": "dev",
     "require": {
-        "laravel/framework": "^5.7",
         "orchestra/testbench-dusk": "~3.4"
     },
     "autoload": {

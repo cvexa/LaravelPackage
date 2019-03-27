@@ -62,9 +62,9 @@
                   </ul>
                   <input type="text" class="form-control" name="extensions" id="extensions" value="{{isset($extensions)?$extensions:''}}" placeholder=".txt,.pdf...">
               </div>
-
+              <hr />
               <div class="form-group" id="custom_path_wrapper">
-                  <label for="extension">Custom Path Application</label><br/>
+                  <label for="path">1.Custom Path Application</label><br/>
                   <label>permission denied for</label>
                   <ul>
                       <li class="red-text">/vendor</li>
@@ -75,7 +75,7 @@
               </div>
 
               <div class="form-group">
-                <label for="location">Browse public folder</label>
+                <label for="location">2.Browse public folder</label>
                 <select class="form-control" name="location" id="location">
                     <option value=0>all</option>
                     @foreach($publicDirectories as $dir)
@@ -86,10 +86,10 @@
               </div>
 
               <div class="form-group" id="custom_path_outside_wrapper">
-                  <label for="outside">Custom Path outside the Application folder</label><br/>
+                  <label for="outside">3.Custom Path outside the Application folder</label><br/>
                   <input type="text" name="outside" id="outside" value="{{isset($outside)?$outside:''}}" placeholder="/something/something">
               </div>
-
+                <hr />
               <div class="form-group">
                   <label for="extension">Search filter</label>
                   @if(isset($filter))

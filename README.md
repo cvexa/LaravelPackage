@@ -26,6 +26,10 @@ if stability errors run
 ```
 composer require "cvexa/finder:dev-master"
 ```
+if links are not supported error run
+```
+php artisan storage:link
+```
 package will install orchestra/testbench-dusk package if not presented<br/>
 if package its not installed yet run the following comand in order to run the tests later<br>
 
@@ -44,8 +48,7 @@ searchTest.php will be copied to Tests\Browser;
 ## Package routes
 
 ```
-Route::get('cvexa/find', 'FinderController@index')->name('find');
-Route::get('cvexa/search', 'FinderController@search')->name('find.me');
+GET /cvexa/find
 ```
 
 ## Description
